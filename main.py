@@ -21,7 +21,7 @@ while True:
 
     if menu == "1":
         frames = 0
-
+        #Picks random image from dataset, could also be in series or pick random but normalized
         tag_index = random.randint(0, max_number)
 
         word_to_interpret = tag.tags[tag_index]
@@ -33,9 +33,11 @@ while True:
             res, frame = cap.read()
 
             if not res:
+                #Camera fails to open
                 break
 
             if frames == capture_rate:
+                #Every x frames save the current
 
                 frame_pd = pd.DataFrame({word_to_interpret: [frame]})
 
@@ -44,7 +46,7 @@ while True:
                 frames = 0
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
-                #Paro manual de toma de datos
+                #Manual stop per image
                 break
 
 
